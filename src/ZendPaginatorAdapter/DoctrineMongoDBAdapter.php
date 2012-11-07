@@ -2,7 +2,7 @@
 
 namespace ZendPaginatorAdapter;
 
-use Zend\Paginator\Adapter;
+
 use Doctrine\ODM\MongoDB\Query\Builder;
 use Doctrine\ODM\MongoDB\Cursor;
 
@@ -11,7 +11,7 @@ use Doctrine\ODM\MongoDB\Cursor;
  *
  * Allows pagination of Doctrine\ODM\MongoDB\Query objects
  */
-class DoctrineMongoDBAdapter implements Adapter
+class DoctrineMongoDBAdapter implements \Zend_Paginator_Adapter_Interface
 {
     /**
      * The query builder to paginate
@@ -40,7 +40,7 @@ class DoctrineMongoDBAdapter implements Adapter
         $results = $queryBuilder->skip($offset)->limit($itemCountPerPage)->getQuery()->execute();
 
         // If we get a Cursor, transform it to an array
-        if($results instanceof Cursor) {
+        if ($results instanceof Cursor) {
             $results = $results->toArray();
         }
 
